@@ -34,6 +34,31 @@ for index,row in skills_df.iterrows():
     skills_dict[cleaned_text].append(row['Skills'])
     
     
+from pypika import MySQLQuery, Table
+import mysql.connector
+
+#connect to the database
+skillsdb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  database='skills_db',
+  passwd=""
+)
+cursor =skillsdb.cursor()
+
+
+#insert dict to database
+skill_table= Table('skill')
+description_table= Table('description')
+#first loop to insert cleaned text (key)
+#second loop to insert full text (value)
+for key in skills_dict:
+    query=MySQLQuery.into(skill_table).columns('cleaned_text').insert(key)
+    cursor.execute(str(query))
+    for value in skills_dict[key]:
+        cleaned_text_id=cursor.lastrowid
+        query=MySQLQuery.into(description_table).columns('skill_id','text').insert( cleaned_text_id,value)
+        cursor.execute(str(query))
 
 
         
