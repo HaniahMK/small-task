@@ -5,21 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "description".
+ * This is the model class for table "synonym".
  *
  * @property int $id
  * @property int $skill_id
- * @property string $text
+ * @property string $synonym_text
+ * @property bool $is_original
  */
-class Description extends \yii\db\ActiveRecord
+class Synonym extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
-    public $skillText;
+    public $skillCleanedText;
     public static function tableName()
     {
-        return 'description';
+        return 'synonym';
     }
 
     /**
@@ -28,9 +29,11 @@ class Description extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['skill_id', 'text'], 'required'],
+            [['skill_id', 'synonym_text'], 'required'],
             [['skill_id'], 'integer'],
-            [['text'], 'string', 'max' => 1000],
+            [['is_original'], 'boolean'],
+            [['synonym_text'], 'string', 'max' => 1000],
+            [['skillCleanedText'],'string'],
         ];
     }
 
@@ -42,7 +45,8 @@ class Description extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'skill_id' => 'Skill',
-            'text' => 'Text',
+            'synonym_text' => 'Synonym Text',
+            'is_original' => 'Original Text/ Synonym',
         ];
     }
     public function getSkill()
@@ -51,8 +55,15 @@ class Description extends \yii\db\ActiveRecord
         return $this->hasOne(Skill::class, ['id' => 'skill_id']);
     }
 
-    public function getSkillText()
+    public function getSkillCleanedText()
     {
         return $this->skill ? $this->skill->cleaned_text :'';
     }
+    public function getIsOriginalText()
+    {
+        return $this->is_original ? 'Original': 'Synonym';
+    }
+
+    
+
 }

@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Description */
+/* @var $model app\models\Synonym */
 
-$this->title = 'Create Description';
-$this->params['breadcrumbs'][] = ['label' => 'Descriptions', 'url' => ['index']];
+$this->title = 'Create Synonym';
+$this->params['breadcrumbs'][] = ['label' => 'Synonyms', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="description-create">
+<div class="synonym-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

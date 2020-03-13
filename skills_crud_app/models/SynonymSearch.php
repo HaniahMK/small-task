@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Description;
+use app\models\Synonym;
 
 /**
- * DescriptionSearch represents the model behind the search form of `app\models\Description`.
+ * SynonymSearch represents the model behind the search form of `app\models\Synonym`.
  */
-class DescriptionSearch extends Description
+class SynonymSearch extends Synonym
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,8 @@ class DescriptionSearch extends Description
     {
         return [
             [['id', 'skill_id'], 'integer'],
-            [['text'], 'safe'],
+            [['synonym_text','skillCleanedText'], 'safe'],
+            [['is_original'], 'boolean'],
         ];
     }
 
@@ -40,7 +41,7 @@ class DescriptionSearch extends Description
      */
     public function search($params)
     {
-        $query = Description::find();
+        $query = Synonym::find()->innerJoin('skill',' synonym.skill_id = skill.id');
 
         // add conditions that should always apply here
 
@@ -60,9 +61,18 @@ class DescriptionSearch extends Description
         $query->andFilterWhere([
             'id' => $this->id,
             'skill_id' => $this->skill_id,
+            'is_original' => $this->is_original,
+
         ]);
 
-        $query->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'synonym_text', $this->synonym_text]);
+        $query->andFilterWhere(['like', 'skill.cleaned_text', $this->skillCleanedText]);
+        $dataProvider->sort->attributes['skillCleanedText'] = [
+
+            'asc' => ['skill.cleaned_text' => SORT_ASC],
+            'desc' => ['skill.cleaned_text' => SORT_DESC],
+        ];
+
 
         return $dataProvider;
     }

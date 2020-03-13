@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Description */
+/* @var $model app\models\Synonym */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Descriptions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Synonyms', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="description-view">
+<div class="synonym-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,11 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            [
-                'attribute'=>'skill_id',
-                'value' =>$model->getSkillText()
-            ],
-            'text:ntext',
+            'skill_id',
+            'synonym_text',
+            'is_original:boolean',
         ],
     ]) ?>
 

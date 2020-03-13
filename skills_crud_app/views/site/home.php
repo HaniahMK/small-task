@@ -13,7 +13,7 @@ $this->title = 'Small Task Application';
 
         <p><a class="btn btn-lg btn-success" href="/skill">View Skills</a></p>
 
-        <p><a class="btn btn-lg btn-success" href="/description">View Description</a></p>
+        <p><a class="btn btn-lg btn-success" href="/synonym">View Synonym</a></p>
     </div>
 
     <div class="body-content">

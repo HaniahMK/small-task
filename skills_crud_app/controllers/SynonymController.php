@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Description;
-use app\models\DescriptionSearch;
+use app\models\Synonym;
+use app\models\SynonymSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DescriptionController implements the CRUD actions for Description model.
+ * SynonymController implements the CRUD actions for Synonym model.
  */
-class DescriptionController extends Controller
+class SynonymController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class DescriptionController extends Controller
     }
 
     /**
-     * Lists all Description models.
+     * Lists all Synonym models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DescriptionSearch();
+        $searchModel = new SynonymSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class DescriptionController extends Controller
     }
 
     /**
-     * Displays a single Description model.
+     * Displays a single Synonym model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class DescriptionController extends Controller
     }
 
     /**
-     * Creates a new Description model.
+     * Creates a new Synonym model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Description();
+        $model = new Synonym();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class DescriptionController extends Controller
     }
 
     /**
-     * Updates an existing Description model.
+     * Updates an existing Synonym model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class DescriptionController extends Controller
     }
 
     /**
-     * Deletes an existing Description model.
+     * Deletes an existing Synonym model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class DescriptionController extends Controller
     }
 
     /**
-     * Finds the Description model based on its primary key value.
+     * Finds the Synonym model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Description the loaded model
+     * @return Synonym the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Description::findOne($id)) !== null) {
+        if (($model = Synonym::findOne($id)) !== null) {
             return $model;
         }
 
