@@ -64,6 +64,6 @@ class Synonym extends \yii\db\ActiveRecord
         return $this->is_original ? 'Original': 'Synonym';
     }
 
-    
+
 
 }

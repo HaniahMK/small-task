@@ -30,9 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'skill_id',
+            [
+                'attribute'=>'skill_id',
+                'value' =>$model->getSkillCleanedText()
+            ],
             'synonym_text',
-            'is_original:boolean',
+            [
+                'label'=>'Synonym/ Original',
+                'attribute'=>'is_original',
+
+                'value' => function($model)
+                { return $model->getIsOriginalText();},
+
+
+
+
+            ]
         ],
     ]) ?>
 

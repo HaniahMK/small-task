@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use  yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Synonym */
@@ -12,9 +13,13 @@ use  yii\helpers\ArrayHelper;
 <div class="synonym-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?= $form->field($model, 'skill_id')->widget(Select2::className(),[
+        'language' => 'fr',
+        'data' =>  ArrayHelper::map(\app\models\Skill::find()->all(),'id','cleaned_text'),
 
-    <?= $form->field($model, 'skill_id')->dropDownList(
-        ArrayHelper::map(\app\models\Skill::find()->all(),'id','cleaned_text')) ?>
+
+    ])?>
+
 
     <?= $form->field($model, 'synonym_text')->textArea(['maxlength' => true]) ?>
 

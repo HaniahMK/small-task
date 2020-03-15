@@ -32,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Skill',
                 'attribute'=>'skillCleanedText',
                 'value'=> function($model)
-                {return $model->getSkillCleanedText();}
+                {return $model->getSkillCleanedText();},
+
 
             ],
             'synonym_text',
@@ -44,6 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>array("0"=>"Synonym","1"=>"Original"),
                 'value' => function($model)
                   { return $model->getIsOriginalText();},
+                'contentOptions'=>[ 'style'=>'width: 120px'],
+
+
 
             ]
 
