@@ -67,6 +67,7 @@ class SynonymSearch extends Synonym
 
         $query->andFilterWhere(['like', 'synonym_text', $this->synonym_text]);
         $query->andFilterWhere(['like', 'skill.cleaned_text', $this->skillCleanedText]);
+        
         $dataProvider->sort->attributes['skillCleanedText'] = [
 
             'asc' => ['skill.cleaned_text' => SORT_ASC],

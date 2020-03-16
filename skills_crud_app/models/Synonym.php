@@ -34,7 +34,17 @@ class Synonym extends \yii\db\ActiveRecord
             [['is_original'], 'boolean'],
             [['synonym_text'], 'string', 'max' => 1000],
             [['skillCleanedText'],'string'],
+            [['skill_id','is_original'],'ValidateOriginal','skipOnEmpty' => false, 'skipOnError' => false]
+
         ];
+    }
+    function ValidateOriginal($attribute, $params)
+    { $has_original= count($this->find()->where(['skill_id'=>$this->skill_id])
+                                ->andWhere(['is_original'=>1])->all());
+
+          if($this->is_original && $has_original >0)
+                $this->addError($attribute,"Skill already has original text");
+
     }
 
     /**
@@ -64,6 +74,15 @@ class Synonym extends \yii\db\ActiveRecord
         return $this->is_original ? 'Original': 'Synonym';
     }
 
+    public function getOriginalText()
+    {
+        $orginal_text=$this->find()->select(['synonym_text'])->where(['skill_id' =>$this->skill_id] )
+            ->andWhere(['is_original'=>1])
+            ->one();
+        return  $orginal_text['synonym_text'];
+
+
+    }
 
 
 }

@@ -108,6 +108,21 @@ class SynonymController extends Controller
 
         return $this->redirect(['index']);
     }
+    public function actionDictionary()
+    {
+        $searchModel = new SynonymSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = [
+            'skill_id' => SORT_ASC,
+
+        ];;
+
+
+        return $this->render('dictionary', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Finds the Synonym model based on its primary key value.
